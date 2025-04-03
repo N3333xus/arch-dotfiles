@@ -1,9 +1,13 @@
 ## arch-dotfiles
 
-Terminal: Alacritty
-WM: i3
-Bar: Polybar
-Compositor: Picom
+Terminal: Kitty
+wallpapers: hyprpaper
+WM: Hyprland
+Bar: waybar
+Icons:
+App Launcher: wofi
+Compositor: 
 Font:
-File Manager:
+File Manager: Dolphin
 Lockscreen:
+

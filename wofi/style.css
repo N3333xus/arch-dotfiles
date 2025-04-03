@@ -1,0 +1,14 @@
+window {
+    background-color: rgba(30, 30, 46, 0.9); /* Cor de fundo */
+    border-radius: 12px;
+    border: 2px solid #89b4fa; /* Borda azul */
+  }
+  
+  #input {
+    color: #cdd6f4; /* Cor do texto */
+    font-size: 16px;
+  }
+  
+  #entry:selected {
+    background-color: #89b4fa; /* Destaque selecionado */
+  }
