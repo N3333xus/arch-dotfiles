@@ -1,0 +1,95 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 41,
+  "spacing": 4,
+  "margin-top": 5,
+  "margin-bottom": 3,
+  "margin-left": 5,
+  "margin-right": 5,
+  
+  "modules-left": ["custom/launcher", "hyprland/workspaces"],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "disk",
+    "network",
+    "pulseaudio",
+    "clock",
+    "battery"
+    
+  ],
+
+  "custom/launcher": {
+    "format": "",
+    "on-click": "wofi --show drun",
+    "tooltip": false,
+    "on-click-right": "killall wofi || wofi --show drun"
+  },
+
+  "hyprland/workspaces": {
+  "format": "{name}",  
+  "format-icons": {
+    "active": "",      
+    "default": "",     
+    "urgent": "⚠"
+  },
+    "persistent_workspaces": {
+      "1": {}, "2": {}, "3": {}, "4": {}, "5": {}
+    }
+  },
+
+  "cpu": {
+    "format": "CPU {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "RAM {}%"
+  },
+
+  "battery": {
+      "states": {
+        "warning": 30,
+        "critical": 15
+      },
+      "format": "{icon} {capacity}% ",
+      "format-full": "{icon} {capacity}% ",
+      "format-charging": " {capacity}% ",
+      "format-plugged": " {capacity}% ",
+      "format-alt": "{time} {icon} ",
+      "format-icons": ["", "", "", "", ""]
+    },
+
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰈀 {ifname}",
+    "format-disconnected": "󰖪 Offline",
+    "interval": 5
+  },
+
+  "disk": {
+    "format": " {percentage_used}%",
+    "path": "/",
+    "interval": 30
+  },
+
+  "clock": {
+      "tooltip-format": "<big>{:%Y %B}< big>\n<tt><small>{calendar}</small></tt>",
+      "format-alt": "{:%d-%m-%Y}"
+    
+  },
+
+  "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-bluetooth": "{volume}% {icon} {format_source}",
+      "format-bluetooth-muted": " {icon} {format_source}",
+      "format-muted": "",
+      "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "",
+        "default": ["", "", ""]
+      },
+      "on-click": "pavucontrol"
+  }
+}
