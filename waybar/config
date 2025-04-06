@@ -14,6 +14,8 @@
     "memory",
     "disk",
     "network",
+    "custom/nightlight",
+    "custom/microphone",
     "pulseaudio",
     "clock",
     "battery"
@@ -61,8 +63,8 @@
     },
 
   "network": {
-    "format-wifi": " {essid}",
-    "format-ethernet": "󰈀 {ifname}",
+    "format-wifi": " ",
+    "format-ethernet": "󰈀 ",
     "format-disconnected": "󰖪 Offline",
     "interval": 5
   },
@@ -74,9 +76,8 @@
   },
 
   "clock": {
-      "tooltip-format": "<big>{:%Y %B}< big>\n<tt><small>{calendar}</small></tt>",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
       "format-alt": "{:%d-%m-%Y}"
-    
   },
 
   "pulseaudio": {
@@ -85,11 +86,27 @@
       "format-bluetooth-muted": " {icon} {format_source}",
       "format-muted": "",
       "format-icons": {
-        "headphone": "",
         "hands-free": "",
         "headset": "",
         "default": ["", "", ""]
       },
       "on-click": "pavucontrol"
+  }, 
+
+  "custom/microphone": {
+    "format": "{}",
+    "exec": "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo '󰍭' || echo '󰍬'",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "interval": 1,
+    "tooltip": false
+  },
+
+  "custom/nightlight": {
+    "format": "{}",
+    "exec": "pgrep -x wlsunset > /dev/null && echo '' || echo ''",
+    "on-click": "pgrep -x wlsunset && pkill wlsunset || wlsunset -T 4500",
+    "interval": 1,
+    "tooltip": false
   }
+
 }

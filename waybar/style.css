@@ -44,7 +44,7 @@ window#waybar {
 }
 
 /* Elementos com detalhes vermelhos */
-#clock, #cpu, #memory, #battery, #network, #pulseaudio {
+#clock, #cpu, #memory, #battery, #network, #pulseaudio, #custom-nightlight, #custom-microphone  {
 
   padding: 6 3px;
   margin: 6 3px;
@@ -79,7 +79,8 @@ window#waybar {
 
 /* Efeito Hover - Brilho vermelho suave */
 #clock:hover, #cpu:hover, #memory:hover,
-#battery:hover, #network:hover, #pulseaudio:hover {
+#battery:hover, #network:hover, #pulseaudio:hover,
+#custom-nightlight:hover, #custom-microphone:hover  {
   background-color: #330000;
   border-color: #660000;
 }
