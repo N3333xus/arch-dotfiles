@@ -1,112 +1,204 @@
 {
-  "layer": "top",
-  "position": "top",
-  "height": 41,
-  "spacing": 4,
-  "margin-top": 5,
-  "margin-bottom": 3,
-  "margin-left": 5,
-  "margin-right": 5,
-  
-  "modules-left": ["custom/launcher", "hyprland/workspaces"],
-  "modules-right": [
-    "cpu",
-    "memory",
-    "disk",
-    "network",
-    "custom/nightlight",
-    "custom/microphone",
-    "pulseaudio",
-    "clock",
-    "battery"
-    
-  ],
+	"layer": "top", 
+	"position": "top",
+	"margin-left": 3,
+	"margin-right": 3,
+	"modules-left": [
+  		"custom/launcher", 
+  		"clock",
+  		"cpu",   
+  		"memory", 
+  		"disk", 
+  		"temperature", 
+  		"custom/powerDraw", 
+  		"hyprland/window" 
+  	],
+	"modules-center": [
+  		"hyprland/workspaces"
+  	],
+  	"modules-right": [
+  		"tray", 
+  		"backlight", 
+  		"custom/nightlight", 
+  		"bluetooth", 
+  		"pulseaudio", 
+  		"custom/microphone", 
+  		"network", 
+  		"battery"
+  	],
+  	"reload_style_on_change":true,
 
-  "custom/launcher": {
-    "format": "",
-    "on-click": "wofi --show drun",
-    "tooltip": false,
-    "on-click-right": "killall wofi || wofi --show drun"
-  },
+  	"custom/launcher": {
+	    "format": "",
+	    "on-click": "wofi --show drun",
+	    "tooltip": false,
+	    "on-click-right": "killall wofi || wofi --show drun"
+	},
 
-  "hyprland/workspaces": {
-  "format": "{name}",  
-  "format-icons": {
-    "active": "",      
-    "default": "",     
-    "urgent": "⚠"
-  },
-    "persistent_workspaces": {
-      "1": {}, "2": {}, "3": {}, "4": {}, "5": {}
-    }
-  },
+  	"hyprland/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"1": "",
+			"2": "",
+			"3": "",
+			"4": "",
+			"active": "",
+			"default": "",
+			"urgent": "⚠" 
+		},
+       	"persistent-workspaces": {
+         		"*": [ 1, 2, 3, 4 ]
+       	}
+	},
 
-  "cpu": {
-    "format": "CPU {usage}%",
-    "tooltip": false
-  },
-  "memory": {
-    "format": "RAM {}%"
-  },
+	"custom/nightlight": {
+		"format": "{}",
+		"exec": "pgrep -x wlsunset > /dev/null && echo '' || echo ''",
+		"on-click": "pgrep -x wlsunset && pkill wlsunset || wlsunset -T 4500",
+		"interval": 1,
+		"tooltip": false
+	},
 
-  "battery": {
-      "states": {
-        "warning": 30,
-        "critical": 15
-      },
-      "format": "{icon} {capacity}% ",
-      "format-full": "{icon} {capacity}% ",
-      "format-charging": " {capacity}% ",
-      "format-plugged": " {capacity}% ",
-      "format-alt": "{time} {icon} ",
-      "format-icons": ["", "", "", "", ""]
-    },
+	"clock": {
+		"format": "{:%I:%M:%S %p}",
+		"interval":1,
+		"tooltip-format": "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+		"calendar-weeks-pos": "right",
+		"today-format": "<span color='#7645AD'><b><u>{}</u></b></span>",
+		"format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
+		"format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
+		"format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>",
+		"format-alt": "{:%d-%m-%Y}"
+	},
 
-  "network": {
-    "format-wifi": " ",
-    "format-ethernet": "󰈀 ",
-    "format-disconnected": "󰖪 Offline",
-    "interval": 5
-  },
+  "bluetooth": {
+  "format-on": "",
+  "format-off": "",
+  "format-disabled": "󰂲",
+  "format-connected": "󰂴",
+  "format-connected-battery": "{device_battery_percentage}% 󰂴",
+  "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+  "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+  "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+  "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+  "on-click": "rofi-bluetooth"
+ }, 
 
-  "disk": {
-    "format": " {percentage_used}%",
-    "path": "/",
-    "interval": 30
-  },
+	"network": {
+		"format-wifi": " ",
+		"format-ethernet":" ",
+		"format-disconnected": "Offline",
+		"tooltip-format": "{ipaddr}",
+		"tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
+		"tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}"
+	},
 
-  "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-      "format-alt": "{:%d-%m-%Y}"
-  },
+	"battery": {
+    		"interval":1,
+		"states": {
+			"good": 95,
+          	"warning": 30,
+          	"critical": 15
+     	},
+		"format": "{icon} {capacity}%",
+		"format-charging": " {capacity}%",
+		"format-plugged": " {capacity}%",
+		"format-alt": "{time} {icon}",
+		"format-icons": [
+			"󰁻",
+          	"󰁼",
+          	"󰁾",
+          	"󰂀",
+          	"󰂂",
+          	"󰁹"
+     	]
+	},
 
-  "pulseaudio": {
-      "format": "{icon} {volume}%",
-      "format-bluetooth": "{volume}% {icon} {format_source}",
-      "format-bluetooth-muted": " {icon} {format_source}",
-      "format-muted": "",
-      "format-icons": {
-        "hands-free": "",
-        "headset": "",
-        "default": ["", "", ""]
-      },
-      "on-click": "pavucontrol"
-  }, 
+	"backlight": {
+  		"device": "intel_backlight",
+  		"format": "<span font='12'>{icon}</span>",
+  		"format-icons": [
+    			"",
+    			"",
+    			"",
+    			"",
+    			"",
+    			"",
+    			"",
+    			"",
+    			"",
+    			""
+  		],
+  		"on-scroll-down": "light -A 10",
+  		"on-scroll-up": "light -U 10",
+  		"smooth-scrolling-threshold": 1
+	},
 
-  "custom/microphone": {
-    "format": "{}",
-    "exec": "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo '󰍭' || echo '󰍬'",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-    "interval": 1,
-    "tooltip": false
-  },
+	"disk": {
+    		"interval": 30,
+    		"format": " {percentage_used}%",
+    		"path": "/"
+  	},
 
-  "custom/nightlight": {
-    "format": "{}",
-    "exec": "pgrep -x wlsunset > /dev/null && echo '' || echo ''",
-    "on-click": "pgrep -x wlsunset && pkill wlsunset || wlsunset -T 4500",
-    "interval": 1,
-    "tooltip": false
-  }
+  	"cpu": {
+		"interval": 1,
+      	"format": " {usage}%",
+      	"min-length": 5,
+      	"max-length": 5,
+      	"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+ 	},
+
+	"memory": {
+  		"format": " {percentage}%"
+	},
+
+ 	"hyprland/window": {
+    		"format": "( {class} )",
+		"(.*) - shell": "> [$1]"
+    	},
+
+	"temperature": {
+  		"format": " {temperatureC}°C",            
+  		"format-critical": " {temperatureC}°C",
+  		"interval": 1,
+  		"critical-threshold": 80,
+  		"on-click": "foot btop"
+ 	},
+
+	"pulseaudio": {
+      	"format": "{icon} {volume}%",
+      	"format-bluetooth": "{volume}% {icon} {format_source}",
+      	"format-bluetooth-muted": " {icon} {format_source}",
+      	"format-muted": "",
+      	"format-icons": {
+        		"hands-free": "",
+        		"headset": "",
+        		"default": ["", "", ""]
+      	},
+      	"on-click": "pavucontrol"
+  	},
+  	 
+  	"custom/microphone": {
+    		"format": "{}",
+    		"exec": "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo '󰍭' || echo '󰍬'",
+    		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    		"interval": 1,
+    		"tooltip": false
+  	},
+
+	"tray": {
+    		"icon-size": 14,
+    		"spacing": 10
+	},
+
+	"upower": {
+    		"show-icon": false,
+    		"hide-if-empty": true,
+    		"tooltip": true,
+    		"tooltip-spacing": 20
+	}
 
 }
+
+
+

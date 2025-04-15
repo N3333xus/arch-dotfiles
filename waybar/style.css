@@ -1,86 +1,112 @@
 * {
-  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free";
+  border: none;
   font-size: 12px;
-  
-  color: #ebdbb2; /* Off-white para contraste */
+  font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF", "Font Awesome 6 Free";
+  min-height: 2px;
+  color: #ebdbb2;
 }
 
 window#waybar {
-  background-color: rgba(10, 10, 10, 0.80);
-  border-radius: 5;
-  /*border: 2px solid #cc0000;*/
+background: transparent;
+margin: 5px;
 }
 
-#workspaces button {
-    color: #4a4a4a;
-    padding: 0px 7px;       /* Ajuste o espaçamento interno */
-    margin: 0 2px;              /* Remove margens externas */
-    transition: all 0.3s ease;
-    border-radius: 5px;       /* Remove bordas arredondadas */
-    /*border-left: 1.5px solid #cc0000;*/
-    /*border-right: 1.5px solid #cc0000;*/
-    background: transparent;
-
-}
-
-/* Remove a borda esquerda duplicada entre botões 
-#workspaces button + button {
-    border-left: none;
-    margin-left: -1.5px;    
-}*/
-
-/* Workspace ativa */
-#workspaces button.active {
-    color: #ffffff;
-    background: rgba(40, 40, 40, 1);
-    border-bottom: 2px solid #cc0000;
-}
-
-/* Workspace urgente */
 #workspaces button.urgent {
-    background-color: #cc0000;
-    color: #1a1a1a;
-    border-bottom: 2px solid #cc0000;
-}
-
-/* Elementos com detalhes vermelhos */
-#clock, #cpu, #memory, #battery, #network, #pulseaudio, #custom-nightlight, #custom-microphone  {
-
-  padding: 6 3px;
-  margin: 6 3px;
- 
+  background-color: #cc0000;
+  color: #1a1a1a;
 }
 
 #custom-launcher {
-  color: #cc0000;
-  font-size: 24px;
-  margin-left: 10px;
-  margin-right: 10px;
+
+  padding: 0 10px;
 }
 
-/* Status da Bateria*/ 
+.modules-right {
+padding-left: 5px;
+border-radius: 15px 15px 15px 15px;
+margin-top: 2px;
+background-color: rgba(10, 10, 10, 0.75);
+}
+
+.modules-center {
+padding: 0 0px;
+margin-top: 2px;
+border-radius: 15px 15px 15px 15px;
+background-color: rgba(10, 10, 10, 0.75);
+}
+
+.modules-left {
+border-radius: 15px 15px 15px 15px;
+margin-top: 2px;
+background-color: rgba(10, 10, 10, 0.75);
+}
+
+#battery,
+#custom-nightlight,
+#custom-powerDraw,
+#bluetooth,
+#pulseaudio,
+#network,
+#disk,
+#memory,
+#backlight,
+#cpu,
+#temperature,
+#custom-microphone,
+#tray,
+#window,
+#workspaces,
+#clock {
+padding: 0 5px;
+}
+#pulseaudio {
+padding-top: 3px;
+}
+
+#temperature.critical,
+#pulseaudio.muted {
+color: #FF0000;
+padding-top: 0;
+}
+
+
+
+
+#clock{
+color: #5fd1fa;
+}
+
 #battery {
+color: #00cc00;
+}
+
+#battery.charging {
   color: #00cc00;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  
+
+}
+
+#battery.warning:not(.charging) {
+  color: #ffbe61;
+}
+
+#battery.critical:not(.charging) {
+  color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 
-#battery.critical {
-  animation: blink-red 1s infinite;
-  background-color: #330000;
-}
-
-@keyframes blink-red {
-  0% { opacity: 1; }
-  50% { opacity: 0.3; }
-  100% { opacity: 1; }
-}
-
-
-
-/* Efeito Hover - Brilho vermelho suave */
-#clock:hover, #cpu:hover, #memory:hover,
-#battery:hover, #network:hover, #pulseaudio:hover,
-#custom-nightlight:hover, #custom-microphone:hover  {
-  background-color: #330000;
-  border-color: #660000;
+@keyframes blink {
+  to {
+      color: #000000;
+  }
 }
